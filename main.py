@@ -1,16 +1,19 @@
 import os
-from pathlib import Path
 
-ENTRY = "This week I lost my keys 9 times; the couch cushions now charge rent."
+WEEK_LINE = "27 boxes packed, 1 room moved, $40 in tape — my relocation was mostly adhesive."
 
 
-def main() -> None:
-    if not ENTRY.strip() or len(ENTRY) > 100:
-        raise ValueError("entry must contain 1 to 100 characters")
-    output_dir = Path(os.getenv("MAKEFUN_OUTPUT_DIR", "/output"))
-    output_dir.mkdir(parents=True, exist_ok=True)
-    (output_dir / "entry.txt").write_bytes(ENTRY.encode("utf-8"))
+def emit() -> None:
+    if not WEEK_LINE.strip():
+        raise ValueError("week line must not be blank")
+    if len(WEEK_LINE) > 100:
+        raise ValueError("week line exceeds 100 characters")
+    target_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
+    os.makedirs(target_dir, exist_ok=True)
+    destination = os.path.join(target_dir, "entry.txt")
+    with open(destination, "wb") as handle:
+        handle.write(WEEK_LINE.encode("utf-8"))
 
 
 if __name__ == "__main__":
-    main()
+    emit()
