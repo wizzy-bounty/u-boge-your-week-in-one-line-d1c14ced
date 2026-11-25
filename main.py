@@ -1,6 +1,6 @@
 import os
 
-ENTRY = "I reheated one coffee four times; by Friday it had seniority and still no flavor."
+ENTRY = "Monday I fixed the leak; by Friday the bucket had a name and its own chair."
 
 
 def main():
