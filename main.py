@@ -1,13 +1,14 @@
 import os
-from pathlib import Path
 
-ENTRY = "My week: shipped 130 entries, received character development."
+ENTRY = "I reheated one coffee four times; by Friday it had seniority and still no flavor."
 
 
-def main() -> None:
-    output_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output")
-    output_dir.mkdir(parents=True, exist_ok=True)
-    (output_dir / "entry.txt").write_text(ENTRY, encoding="utf-8")
+def main():
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
+    os.makedirs(out_dir, exist_ok=True)
+    path = os.path.join(out_dir, "entry.txt")
+    with open(path, "w", encoding="utf-8", newline="") as f:
+        f.write(ENTRY)
 
 
 if __name__ == "__main__":
