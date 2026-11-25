@@ -32,17 +32,20 @@ import os
 ENTRY = "130 entries, zero wins, $0.018 richer \u2014 my week was a raffle ticket that did its own paperwork."
 
 
+def validate_entry(text: str) -> None:
+    # Gate check: 1-100 UTF-8 characters, one line, not whitespace only.
+    assert "\n" not in text and "\r" not in text, "entry must be one line"
+    assert text.strip(), "entry must not be only whitespace"
+    assert 1 <= len(text) <= 100, "entry must be 1-100 characters"
+
+
 def main() -> None:
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
 
-    # Gate check before writing: 1-100 UTF-8 characters, one line,
-    # not whitespace only.
     text = ENTRY
-    assert "\n" not in text and "\r" not in text, "entry must be one line"
-    assert text.strip(), "entry must not be only whitespace"
-    assert 1 <= len(text) <= 100, "entry must be 1-100 characters"
+    validate_entry(text)
 
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(text)
