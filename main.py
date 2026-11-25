@@ -1,6 +1,6 @@
 import os
 
-WEEK_LINE = "27 boxes packed, 1 room moved, $40 in tape — my relocation was mostly adhesive."
+WEEK_LINE = "1,200 words written, 40 kept, $0 paid — I mined a mountain and pocketed gravel."
 
 
 def emit() -> None:
